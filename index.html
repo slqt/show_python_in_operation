@@ -100,6 +100,18 @@
 						```
 						</script>
 					</section>
+					<section  data-markdown>
+						<script type="text/template">
+						### 读写配置文件 ——ConfigParser
+						```python
+						import ConfigParser
+						cf = ConfigParser.ConfigParser()
+						cf.read("test.conf")
+						s = cf.sections()
+						db_host = cf.get("db", "db_host")
+						```
+						</script>
+					</section>
 				</section>
 				<section>常用的开发技巧
 					<section data-markdown>

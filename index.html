@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown> 
+					<script type="text/template">
+					## Python在运维领域的运用     
+					#### by:蓝雪
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						## 一切基于需求
+						* 选择技术栈
+						* 选择框架
+						* 丰富的Python库
+						* 常用开发技巧
+						* 技能升级拓展
+					</script>
+				</section>
+				<section>
+					<section>选择技术栈</section>
+					<section  data-markdown>
+						<script type="text/template">
+						- 部署 
+						- 监控 
+						- 管理 
+						- 维护 
+						- 优化 
+						- 防护
+						</script>
+					</section>
+				</section>
+				<section>
+					<section>选择框架</section>
+					<section  data-markdown>
+						<script type="text/template">
+						- Saltstack ：模块多，可扩展性强
+						- Openstack ：云计算平台，管理虚拟机与存储资源
+						- Puppet（Ruby）：支持资源之间的关系配置
+						- Ansible  ：类似远程命令执行，只需在主控端部署
+						- ……
+						</script>
+					</section>
+				</section>
+				<section>丰富的Python库
+					<section data-markdown>
+						<script type="text/template">
+						## 获取Windows系统信息——wmi
+						```python
+						c = wmi.WMI ()
+						c.Win32_Service ()
+						c.Win32_DiskDrive ()
+						c.Win32_Processor()
+						```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+						## 操作windows窗体——
+						### win32api，win32con，win32gui
+						```python
+						FindWindow(lpClassName=None, lpWindowName=None)
+						FindWindowEx(hwndParent=0, hwndChildAfter=0, lpszClass=None, lpszWindow=None)
+						win32gui.SendMessage(tid, win32con.WM_SETTEXT, None, 'hello')
+						win32gui.PostMessage(tid, win32con.WM_KEYDOWN, win32con.VK_RETURN, 0)
+						win32gui.PostMessage(tid, win32con.WM_KEYUP, win32con.VK_RETURN, 0)
+						```
+						</script>
+					</section>
+					<section  data-markdown>
+						<script type="text/template">
+						### 操作注册表——winreg
+						```python
+						root = winreg.HKEY_LOCAL_MACHINE
+						subkey = r'SYSTEM\CurrentControlSet\Control\Session Manager\Environment'
+						winreg.OpenKey(root, subkey, 0, winreg.KEY_READ)}}
+						```
+						</script>
+					</section>
+				</section>
+				<section>常用的开发技巧
+					<section data-markdown>
+						<script type="text/template">
+						### 应对版本差异
+						##### 方法一：
+						```python
+							if sys.hexversion > 0x03000000:
+							    import winreg
+							else:   
+							    import _winreg as winreg
+						```
+						##### 方法二：
+						```python
+							try:
+							    import winreg
+							except:   
+							    import _winreg as winreg
+						```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+						### 应对系统差异
+						- 换行符差异：
+						 - linux：\n
+						 - windows: \r\n
+						- 后台运行的方式
+						 - linux: &
+						 - windows: start /B
+						</script>
+					</section>
+				</section>
+				<section>技能升级拓展
+					<section  data-markdown>
+						<script type="text/template">
+						### 运维管理->安全管理
+						- 弱密码
+						- 使用默认配置
+						- 端口开放不当
+						- 预置账户与密码
+						- 字符串处理不当：Tornado框架缺陷
+						- 备份文件或测试文件未删除
+						</script>
+					</section>
+<!-- 					<section  data-markdown> -->
+<!-- 						<script type="text/template"> -->
+<!-- 						# 谢谢！ -->
+<!-- 						</script> -->
+<!-- 					</section> -->
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
